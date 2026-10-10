@@ -1,0 +1,9 @@
+# OS
+.DS_Store
+
+# Local dependencies
+node_modules/
+
+# Editor and agent settings
+.claude/
+.vscode/

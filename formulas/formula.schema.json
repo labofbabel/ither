@@ -1,0 +1,439 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/labofbabel/ither/main/formulas/formula.schema.json",
+  "title": "Ither formula",
+  "description": "A formula defines an Ither structure space. Pass it as Ither({ space: formula }) to resolve a Space (or use the synchronous Ither.from factory), which decodes BigInt coordinates into structures and back. Anything this schema does not declare is refused. Determinism: a coordinate is a pure function of (Ither version, formula, structure). Convention: arrays are ordered (order is significant), objects are named (key order is irrelevant).",
+  "itherVersion": "0.3.0",
+  "type": "object",
+  "required": [
+    "layers"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "layers": {
+      "type": "object",
+      "minProperties": 1,
+      "description": "Named layer specs. Names are user-chosen; resolution order follows `from`.",
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "type",
+              "domains"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "const": "AST"
+              },
+              "domains": {
+                "type": "object",
+                "required": [
+                  "x"
+                ],
+                "minProperties": 2,
+                "properties": {
+                  "x": {
+                    "type": "array",
+                    "items": {
+                      "type": [
+                        "string",
+                        "number",
+                        "boolean"
+                      ]
+                    },
+                    "description": "leaf symbols"
+                  }
+                },
+                "patternProperties": {
+                  "^o\\d+$": {
+                    "type": "array",
+                    "items": {
+                      "type": [
+                        "string",
+                        "number",
+                        "boolean"
+                      ]
+                    },
+                    "description": "operator symbols of arity n (o1, o2, …)"
+                  }
+                },
+                "additionalProperties": false,
+                "description": "an 'x' leaf domain and at least one operator domain"
+              },
+              "options": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "maxNodes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "default": 64,
+                    "description": "cap on internal-node count — a guardrail, not a bound: coordinates past it decode to OUTSIDE"
+                  },
+                  "ranking": {
+                    "type": "string",
+                    "enum": [
+                      "leafMinor",
+                      "leafMajor",
+                      "opMajor"
+                    ],
+                    "default": "leafMinor",
+                    "description": "digit layout within a tree size: which choices a +1 cycles first"
+                  }
+                }
+              }
+            },
+            "description": "expression trees, topology + per-node symbol ranked jointly (decorated Schröder)"
+          },
+          {
+            "type": "object",
+            "required": [
+              "type",
+              "domains"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "const": "OBJ"
+              },
+              "domains": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "string",
+                      "number",
+                      "boolean"
+                    ]
+                  },
+                  "description": "the choices, in order"
+                },
+                "description": "named lists of choices"
+              },
+              "shape": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1,
+                "description": "the order of the keys: every domain key, once; default: sorted domain keys"
+              }
+            },
+            "description": "key/value objects (type-coerced on decode)"
+          },
+          {
+            "type": "object",
+            "required": [
+              "type",
+              "domains",
+              "shape"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "const": "ARR"
+              },
+              "domains": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "string",
+                      "number",
+                      "boolean"
+                    ]
+                  },
+                  "description": "the choices, in order"
+                },
+                "description": "named lists of choices"
+              },
+              "shape": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1,
+                "description": "the domain of each position; entries may repeat, every domain is used"
+              }
+            },
+            "description": "fixed-shape arrays (type-coerced on decode)"
+          },
+          {
+            "type": "object",
+            "required": [
+              "type",
+              "domains"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "const": "STR"
+              },
+              "domains": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "array",
+                  "items": {
+                    "type": [
+                      "string",
+                      "number",
+                      "boolean"
+                    ]
+                  },
+                  "description": "the choices, in order"
+                },
+                "description": "named lists of choices"
+              },
+              "shape": {
+                "type": "string",
+                "minLength": 1,
+                "description": "template; tokens matching domain keys are variable slots, and every domain key appears"
+              },
+              "from": {
+                "type": "string",
+                "minLength": 1,
+                "description": "name of an upstream layer whose decoded result is this template (chaining)"
+              }
+            },
+            "description": "fill-in templates (string output)",
+            "oneOf": [
+              {
+                "required": [
+                  "shape"
+                ],
+                "not": {
+                  "required": [
+                    "from"
+                  ]
+                }
+              },
+              {
+                "required": [
+                  "from"
+                ],
+                "not": {
+                  "required": [
+                    "shape"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "type",
+              "domains",
+              "shape",
+              "options"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "const": "LSM"
+              },
+              "domains": {
+                "type": "object",
+                "required": [
+                  "alphabet"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "alphabet": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1,
+                    "description": "the symbols"
+                  }
+                }
+              },
+              "shape": {
+                "type": "object",
+                "required": [
+                  "variables",
+                  "axiom"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "variables": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1,
+                    "description": "symbols with a production"
+                  },
+                  "axiom": {
+                    "type": "string",
+                    "description": "the start string"
+                  }
+                }
+              },
+              "options": {
+                "type": "object",
+                "required": [
+                  "maxLen"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "maxLen": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "description": "cap on each production length — a guardrail, not a bound"
+                  },
+                  "iterations": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "default": 2,
+                    "description": "derivation depth of the string a chained layer takes"
+                  }
+                }
+              }
+            },
+            "description": "L-system grammar space"
+          },
+          {
+            "type": "object",
+            "required": [
+              "type",
+              "shape"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "const": "TRI"
+              },
+              "shape": {
+                "type": "object",
+                "required": [
+                  "n"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "n": {
+                    "type": "integer",
+                    "minimum": 3,
+                    "description": "polygon vertex count"
+                  }
+                }
+              }
+            },
+            "description": "triangulations of a convex polygon"
+          },
+          {
+            "type": "object",
+            "required": [
+              "type",
+              "domains"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "const": "NUM"
+              },
+              "domains": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object",
+                  "required": [
+                    "min",
+                    "max",
+                    "steps"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "min": {
+                      "type": "number"
+                    },
+                    "max": {
+                      "type": "number"
+                    },
+                    "steps": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  }
+                },
+                "description": "named ranges { min, max, steps }"
+              },
+              "shape": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1,
+                "description": "the order of the keys: every domain key, once; default: sorted domain keys"
+              }
+            },
+            "description": "quantized real-valued axes"
+          },
+          {
+            "type": "object",
+            "required": [
+              "type",
+              "shape"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "const": "PERM"
+              },
+              "shape": {
+                "type": "object",
+                "required": [
+                  "n"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "n": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                }
+              }
+            },
+            "description": "permutations of [0, n) via Lehmer code"
+          }
+        ]
+      }
+    },
+    "projection": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "description": "Output axes in order — entry i is axis i, an array of references. Several references on one entry share that axis (combined by options.combine). A layer named in several entries is split across them (unbounded combine only). \"layer.part\" parts a layer: an OBJ/NUM key, an ARR position index, or an STR variable; every part of a parted layer is assigned exactly once. Every layer is assigned.; default: one axis per layer, in resolution order"
+    },
+    "options": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "combine": {
+          "type": "string",
+          "enum": [
+            "box",
+            "gray",
+            "scramble",
+            "cantor",
+            "morton",
+            "hilbert"
+          ],
+          "default": "box",
+          "description": "how several sources share one axis, for every axis of the space (and how a split divides a layer)"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "layers": {
+    "grammar": {
+      "type": "LSM",
+      "shape": {
+        "variables": [
+          "F"
+        ],
+        "axiom": "F"
+      },
+      "domains": {
+        "alphabet": [
+          "F",
+          "+",
+          "-"
+        ]
+      },
+      "options": {
+        "maxLen": 4,
+        "iterations": 2
+      }
+    },
+    "params": {
+      "type": "STR",
+      "from": "grammar",
+      "domains": {
+        "F": [
+          "Fa",
+          "Fb",
+          "Fc"
+        ]
+      }
+    }
+  }
+}

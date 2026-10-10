@@ -1,0 +1,10 @@
+{
+  "layers": {
+    "order": {
+      "type": "PERM",
+      "shape": {
+        "n": 6
+      }
+    }
+  }
+}

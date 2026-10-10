@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "formulas": [
+    { "name": "ast-shader-expression", "title": "AST — shader expression", "collection": "v1", "file": "v1/ast-shader-expression.json", "tags": ["ast", "single-layer", "shader", "expression"] },
+    { "name": "obj-synth-params", "title": "OBJ — synth params", "collection": "v1", "file": "v1/obj-synth-params.json", "tags": ["obj", "single-layer", "params", "audio"] },
+    { "name": "arr-8-bit-vector", "title": "ARR — 8-bit vector", "collection": "v1", "file": "v1/arr-8-bit-vector.json", "tags": ["arr", "single-layer", "vector", "bits"] },
+    { "name": "str-expression-template", "title": "STR — expression template", "collection": "v1", "file": "v1/str-expression-template.json", "tags": ["str", "single-layer", "template"] },
+    { "name": "lsm-l-system-grammar", "title": "LSM — L-system grammar", "collection": "v1", "file": "v1/lsm-l-system-grammar.json", "tags": ["lsm", "single-layer", "grammar", "l-system"] },
+    { "name": "hybrid-ast-obj-str-identity-3-dims", "title": "Hybrid — AST + OBJ + STR (identity, 3 dims)", "collection": "v1", "file": "v1/hybrid-ast-obj-str-identity-3-dims.json", "tags": ["ast", "obj", "str", "compound", "identity", "3d"] },
+    { "name": "hybrid-collapsed-to-one-dimension", "title": "Hybrid — collapsed to one dimension", "collection": "v1", "file": "v1/hybrid-collapsed-to-one-dimension.json", "tags": ["ast", "obj", "str", "compound", "combine", "collapsed"] },
+    { "name": "hybrid-ast-obj-split-into-a-2-d-grid", "title": "Hybrid — AST + OBJ split into a 2-D grid", "collection": "v1", "file": "v1/hybrid-ast-obj-split-into-a-2-d-grid.json", "tags": ["ast", "obj", "compound", "split", "grid", "2d"] },
+    { "name": "two-ast-subtrees-hybridization", "title": "Two AST subtrees (hybridization)", "collection": "v1", "file": "v1/two-ast-subtrees-hybridization.json", "tags": ["ast", "compound", "hybridization"] },
+    { "name": "parametric-l-system-lsm-str-chain", "title": "Parametric L-system (LSM → STR chain)", "collection": "v1", "file": "v1/parametric-l-system-lsm-str-chain.json", "tags": ["lsm", "str", "chained", "compound", "l-system", "parametric"] },
+    { "name": "ast-topology-substitution-chain", "title": "AST topology → substitution (chain)", "collection": "v1", "file": "v1/ast-topology-substitution-chain.json", "tags": ["ast", "str", "chained", "compound", "topology", "substitution"] },
+    { "name": "ast-topology-leaves-operators-on-3-axes", "title": "AST: topology / leaves / operators on 3 axes", "collection": "v1", "file": "v1/ast-topology-leaves-operators-on-3-axes.json", "tags": ["ast", "str", "chained", "compound", "projection", "3d"] },
+    { "name": "tri-triangulations-of-an-octagon", "title": "TRI — triangulations of an octagon", "collection": "v1", "file": "v1/tri-triangulations-of-an-octagon.json", "tags": ["tri", "single-layer", "catalan", "geometry"] },
+    { "name": "key-dimension-rgba-as-4-axes", "title": "Key→dimension: RGBA as 4 axes", "collection": "v1", "file": "v1/key-dimension-rgba-as-4-axes.json", "tags": ["obj", "part", "projection", "4d", "color"] },
+    { "name": "num-real-params-as-a-2-d-pad", "title": "NUM — real params as a 2-D pad", "collection": "v1", "file": "v1/num-real-params-as-a-2-d-pad.json", "tags": ["num", "single-layer", "real", "2d", "pad"] },
+    { "name": "perm-orderings-of-0-6", "title": "PERM — orderings of [0,6)", "collection": "v1", "file": "v1/perm-orderings-of-0-6.json", "tags": ["perm", "single-layer", "permutation", "ordering"] },
+    { "name": "gray-two-obj-collapsed", "title": "Gray — two OBJ layers collapsed", "collection": "v1", "file": "v1/gray-two-obj-collapsed.json", "tags": ["obj", "compound", "combine", "gray", "locality"] },
+
+    { "name": "lsm-sierpinski-triangle", "title": "L-system — Sierpinski triangle (F-G-G; F→F-G+F+G-F, G→GG)", "collection": "advanced", "file": "advanced/lsm-sierpinski-triangle.json", "tags": ["lsm", "l-system", "fractal", "sierpinski", "advanced"], "description": "Decode at the canonical Sierpinski rules to get the classic derivation; nearby coordinates explore variants." },
+    { "name": "lsm-dragon-curve", "title": "L-system — dragon curve (FX; X→X+YF+, Y→-FX-Y)", "collection": "advanced", "file": "advanced/lsm-dragon-curve.json", "tags": ["lsm", "l-system", "fractal", "dragon", "advanced"], "description": "Heighway dragon: two productions over X,Y producing the self-similar dragon curve." },
+    { "name": "lsm-binary-tree", "title": "L-system — binary tree (F; F→F[+F]F[-F]F)", "collection": "advanced", "file": "advanced/lsm-binary-tree.json", "tags": ["lsm", "l-system", "branching", "tree", "advanced"], "description": "Classic branching tree with the bracket alphabet — push/pop a turtle for symmetric forks." },
+
+    { "name": "utomata-cellular-automata-lab", "title": "Utomata CA lab — Laboratory of Babel (binary expressions over &V/&V4/&V8/&V24 + swizzles)", "collection": "advanced", "file": "advanced/utomata-cellular-automata-lab.json", "tags": ["ast", "str", "chained", "compound", "utomata", "cellular-automata", "expressions", "advanced"], "description": "AST-topology + chained-STR substitution. Topology on dim 0; leaf choice (cell/neighborhood/swizzle/scalar) on dim 1; operator choice on dim 2. Walk one axis to vary one facet of the expression." },
+    { "name": "meta-formula-swatch-space", "title": "Meta-formula — a space of swatch formulas (the tower)", "collection": "advanced", "file": "advanced/meta-formula-swatch-space.json", "tags": ["str", "meta-formula", "tower", "advanced"], "description": "STR emits a valid Ither formula JSON. Each metaCoord decodes to a different swatch formula; parse + Ither.from to compile and decode structures inside it." },
+    { "name": "css-button", "title": "CSS button — style space (OBJ over CSS properties)", "collection": "advanced", "file": "advanced/css-button.json", "tags": ["obj", "css", "styling", "design", "advanced"], "description": "Each coordinate is a button style: background / color / padding / border / radius / fontSize / fontWeight. ~36,000 variants." }
+  ]
+}

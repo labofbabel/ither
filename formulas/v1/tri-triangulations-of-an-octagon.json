@@ -1,0 +1,10 @@
+{
+  "layers": {
+    "poly": {
+      "type": "TRI",
+      "shape": {
+        "n": 8
+      }
+    }
+  }
+}

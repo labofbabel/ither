@@ -1,0 +1,16 @@
+{
+  "layers": {
+    "button": {
+      "type": "OBJ",
+      "domains": {
+        "background": ["#ffffff", "#000000", "#0066cc", "#cc0000", "#00aa44", "transparent"],
+        "color": ["#ffffff", "#000000", "#333333"],
+        "padding": ["4px 8px", "8px 16px", "12px 24px", "16px 32px"],
+        "border": ["none", "1px solid #000", "2px solid #0066cc", "1px dashed #999"],
+        "borderRadius": ["0", "4px", "8px", "16px", "9999px"],
+        "fontSize": ["12px", "14px", "16px", "18px", "24px"],
+        "fontWeight": ["normal", "bold", "300", "500", "700"]
+      }
+    }
+  }
+}

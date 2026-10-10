@@ -1,0 +1,22 @@
+{
+  "layers": {
+    "a": {
+      "type": "OBJ",
+      "domains": {
+        "k": [0, 1, 2, 3, 4, 5, 6, 7]
+      }
+    },
+    "b": {
+      "type": "OBJ",
+      "domains": {
+        "m": [0, 1, 2, 3, 4, 5, 6, 7]
+      }
+    }
+  },
+  "projection": [
+    ["a", "b"]
+  ],
+  "options": {
+    "combine": "gray"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "layers": {
+    "gram": {
+      "type": "LSM",
+      "shape": { "variables": ["F", "G"], "axiom": "F-G-G" },
+      "domains": { "alphabet": ["F", "G", "+", "-"] },
+      "options": { "maxLen": 10, "iterations": 2 }
+    }
+  }
+}

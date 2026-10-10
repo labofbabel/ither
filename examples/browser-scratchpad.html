@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ither browser scratchpad</title>
+<style>
+  :root { color-scheme: dark; font: 14px/1.45 ui-monospace, monospace; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #111318; color: #e3e7ee; }
+  header { padding: 14px 18px; border-bottom: 1px solid #303641; }
+  h1 { margin: 0 0 4px; font-size: 15px; }
+  p { margin: 0; color: #9ca6b5; }
+  main { display: grid; grid-template-columns: 1fr 1fr; min-height: calc(100vh - 74px); }
+  section { display: flex; flex-direction: column; min-width: 0; padding: 14px; }
+  section + section { border-left: 1px solid #303641; }
+  textarea, pre, button {
+    font: inherit; color: inherit; background: #191d24; border: 1px solid #303641;
+    border-radius: 4px;
+  }
+  textarea { flex: 1; min-height: 65vh; padding: 12px; resize: vertical; tab-size: 3; }
+  pre { flex: 1; min-height: 65vh; margin: 0; padding: 12px; overflow: auto; white-space: pre-wrap; }
+  button { align-self: flex-start; margin-top: 10px; padding: 6px 14px; cursor: pointer; }
+  button:hover { border-color: #79adff; color: #79adff; }
+  .error { color: #ff8d86; }
+  @media (max-width: 850px) {
+    main { grid-template-columns: 1fr; }
+    section + section { border-left: 0; border-top: 1px solid #303641; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Ither browser scratchpad</h1>
+  <p>Developer-only, single-file experiment surface. Run through any local static server; it is not part of the package API.</p>
+</header>
+<main>
+  <section>
+    <textarea id="source" spellcheck="false">const formula = await loadFormula('ast-shader-expression');
+const records = [];
+
+const result = await Ither({
+  space: formula,
+  query: {
+    decode: {
+      type: 'ray',
+      start: [0n],
+      direction: [1n],
+      count: 8n,
+    },
+    write: record => records.push(record),
+    manifest: true,
+  },
+  analysis: { suite: ['query-suite'] },
+});
+
+return {
+  version: Ither.version,
+  formula: result.space.formula,
+  records,
+  query: result.query,
+  manifest: result.manifest,
+  analysis: result.analysis,
+};</textarea>
+    <button id="run">Run</button>
+  </section>
+  <section>
+    <pre id="output">Ready.</pre>
+  </section>
+</main>
+<script type="module">
+  import { Ither, Space, Codec, capabilities, formulaSchema } from '../src/index.js';
+  import { listFormulas, loadFormula } from '../formulas/bank.mjs';
+
+  const source = document.querySelector('#source');
+  const output = document.querySelector('#output');
+  const run = document.querySelector('#run');
+  const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
+  const text = value => JSON.stringify(value, (_, item) =>
+    typeof item === 'bigint' ? `${item}n` : item, 2);
+
+  run.addEventListener('click', async () => {
+    run.disabled = true;
+    output.classList.remove('error');
+    output.textContent = 'Running…';
+    try {
+      const execute = new AsyncFunction(
+        'Ither', 'Space', 'Codec', 'capabilities', 'formulaSchema',
+        'listFormulas', 'loadFormula', source.value,
+      );
+      output.textContent = text(await execute(
+        Ither, Space, Codec, capabilities, formulaSchema,
+        listFormulas, loadFormula,
+      ));
+    } catch (error) {
+      output.classList.add('error');
+      output.textContent = error?.stack ?? String(error);
+    } finally {
+      run.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>

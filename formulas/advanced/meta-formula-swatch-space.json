@@ -1,0 +1,13 @@
+{
+  "layers": {
+    "formula": {
+      "type": "STR",
+      "shape": "{\"layers\":{\"swatch\":{\"type\":\"NUM\",\"domains\":{\"hue\":{\"min\":0,\"max\":HMAX,\"steps\":HSTEPS},\"weight\":{\"min\":0,\"max\":1,\"steps\":WSTEPS}}}}}",
+      "domains": {
+        "HMAX": ["360", "180", "1"],
+        "HSTEPS": ["12", "24", "36"],
+        "WSTEPS": ["3", "5", "10"]
+      }
+    }
+  }
+}

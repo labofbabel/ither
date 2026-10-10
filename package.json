@@ -1,0 +1,69 @@
+{
+  "name": "ither",
+  "version": "0.3.0",
+  "description": "Map structured data to and from BigInt coordinates: expression trees, objects, templates, L-systems, triangulations and permutations, each with a unique integer address.",
+  "type": "module",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./dist/ither.min.js": "./dist/ither.min.js",
+    "./formulas/*": "./formulas/*"
+  },
+  "files": [
+    "src",
+    "dist",
+    "formulas",
+    "!formulas/generate-schema.mjs",
+    "docs",
+    "!docs/TODO.md",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test test/*.test.mjs",
+    "verify:artifacts": "npm run formulas:schema && npm run build && git diff --exit-code -- formulas/formula.schema.json dist/ither.min.js",
+    "release:check": "npm test && npm run verify:artifacts && npm pack --dry-run",
+    "prepublishOnly": "npm test && npm run verify:artifacts",
+    "test:grid": "node --test test/coordinate-grid.test.mjs",
+    "test:query": "node --test test/query.test.mjs",
+    "test:runtime": "node --test test/runtime.test.mjs",
+    "test:analysis": "node --test test/analysis-capsules.test.mjs",
+    "test:distribution": "node --test test/distribution.test.mjs",
+    "test:bounds": "node --test test/bounds.test.mjs",
+    "test:formula": "node --test test/formula.test.mjs",
+    "formulas:schema": "node formulas/generate-schema.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/labofbabel/ither.git"
+  },
+  "homepage": "https://github.com/labofbabel/ither#readme",
+  "bugs": {
+    "url": "https://github.com/labofbabel/ither/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Lior Ben-Gai",
+  "engines": {
+    "node": ">=20.10"
+  },
+  "sideEffects": false,
+  "keywords": [
+    "bigint",
+    "combinatorics",
+    "bijection",
+    "ranking",
+    "unranking",
+    "enumeration",
+    "generative",
+    "design-space",
+    "l-system",
+    "permutation",
+    "catalan"
+  ],
+  "license": "MPL-2.0",
+  "devDependencies": {
+    "esbuild": "0.28.1"
+  }
+}
