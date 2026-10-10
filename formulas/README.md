@@ -53,7 +53,7 @@ relative to itself, so it works wherever `formulas/` is served or installed. Eve
 is async and returns a fresh copy:
 
 ```js
-import { listFormulas, loadFormula, loadAll } from 'ither/formulas/bank.mjs';
+import { listFormulas, loadFormula, loadAll } from '@labofbabel/ither/formulas/bank.mjs';
 
 await listFormulas();                       // all entries (metadata only)
 await listFormulas({ tag: 'ast' });         // filtered
@@ -63,6 +63,6 @@ await loadAll();                            // [{ ...entry, formula }] — entry
 ```
 
 Raw subpaths also resolve through the package (`exports`):
-`import reg from 'ither/formulas/registry.json' with { type: 'json' }` or read
-`ither/formulas/v1/<name>.json` directly. In a browser, the import map must map
-`ither/formulas/` to wherever the folder is served.
+`import reg from '@labofbabel/ither/formulas/registry.json' with { type: 'json' }` or read
+`@labofbabel/ither/formulas/v1/<name>.json` directly. In a browser, the import map must
+map `@labofbabel/ither/formulas/` to wherever the folder is served.

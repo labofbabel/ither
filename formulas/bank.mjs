@@ -2,7 +2,7 @@
 // The canonical, versioned set of Ither formulas. One accessor for every runtime:
 // Node, browsers and Deno all load the JSON as modules, relative to this file.
 //
-//   import { listFormulas, loadFormula, loadAll } from 'ither/formulas/bank.mjs';
+//   import { listFormulas, loadFormula, loadAll } from '@labofbabel/ither/formulas/bank.mjs';
 //   const all = await loadAll();                       // [{ name, title, collection, tags, formula }]
 //   const f   = await loadFormula('ast-shader-expression');   // the formula object
 //
@@ -29,7 +29,7 @@ export async function listFormulas({ collection = null, tag = null } = {}) {
 // The formula object for one entry, by name.
 export async function loadFormula(name) {
    const e = (await registry()).formulas.find(f => f.name === name);
-   if (!e) throw new Error(`ither/formulas: no formula named '${name}'`);
+   if (!e) throw new Error(`@labofbabel/ither/formulas: no formula named '${name}'`);
    return readJSON(`./${e.file}`);
 }
 

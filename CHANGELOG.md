@@ -10,6 +10,7 @@ called out here, because it moves every saved coordinate.
 
 ## 0.3.0 — 2026-10-08 (first public release)
 
+- Published on npm as `@labofbabel/ither`.
 - Three tiers: `Ither.from(formula)` compiles a Space; `Ither({ space, query })` decodes
   or encodes grids, rays and lists as records with a manifest; `Ither({ analysis })` runs
   analysis capsules on a space, a geometry, or live or saved records.

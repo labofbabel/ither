@@ -152,7 +152,7 @@ The exact signatures and return contracts are organized by tier in
 [API Chapters 1–3](API.md#chapter-1--tier-1-define-a-space).
 
 ```js
-import { Ither } from 'ither';
+import { Ither } from '@labofbabel/ither';
 
 const space = Ither.from(formula);                 // tier 1: a formula becomes a Space
 
@@ -881,18 +881,18 @@ Node 20.10 or newer is required when importing the package source. The generated
 ## 5.1 Node applications, servers, and command-line scripts
 
 ```bash
-npm install ither
+npm install @labofbabel/ither
 ```
 
 ```js
-import { Ither } from 'ither';
+import { Ither } from '@labofbabel/ither';
 ```
 
 A command-line or server adapter normally provides a formula and a destination for query
 records:
 
 ```js
-import { Ither } from 'ither';
+import { Ither } from '@labofbabel/ither';
 
 const records = [];
 const result = await Ither({
@@ -934,7 +934,7 @@ main workflow. Its loaders are documented in
 With a bundler, use the same package import as Node:
 
 ```js
-import { Ither } from 'ither';
+import { Ither } from '@labofbabel/ither';
 ```
 
 Without a bundler, vendor the single-file module described in §5.4 and import it by URL.

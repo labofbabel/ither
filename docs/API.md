@@ -4,7 +4,7 @@ This document is the public JavaScript API for Ither `0.3.0`. For concepts, desi
 guidance, and longer workflows, use the [manual](MANUAL.md).
 
 ```js
-import { Ither, Space, Codec, capabilities, formulaSchema } from 'ither';
+import { Ither, Space, Codec, capabilities, formulaSchema } from '@labofbabel/ither';
 ```
 
 ## Contents
@@ -54,7 +54,8 @@ import { Ither, Space, Codec, capabilities, formulaSchema } from 'ither';
   representation when stored as JSON.
 
 The root package exports only `Ither`, `Space`, `Codec`, `capabilities`, and
-`formulaSchema`. The single-file build is available at `ither/dist/ither.min.js`.
+`formulaSchema`. The single-file build is available at
+`@labofbabel/ither/dist/ither.min.js`.
 
 # Chapter 1 — Tier 1: define a Space
 
@@ -1097,7 +1098,7 @@ import {
   listFormulas,
   loadFormula,
   loadAll,
-} from 'ither/formulas/bank.mjs';
+} from '@labofbabel/ither/formulas/bank.mjs';
 ```
 
 ## B.1 Bank functions

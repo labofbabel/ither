@@ -1,5 +1,5 @@
 {
-  "name": "ither",
+  "name": "@labofbabel/ither",
   "version": "0.3.0",
   "description": "Map structured data to and from BigInt coordinates: expression trees, objects, templates, L-systems, triangulations and permutations, each with a unique integer address.",
   "type": "module",

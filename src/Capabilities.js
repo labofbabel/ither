@@ -5,7 +5,7 @@
 // Combinator registry. LLMs and clients consume this to author valid formulas without
 // reading prose.
 //
-//   import { capabilities, formulaSchema } from 'ither';
+//   import { capabilities, formulaSchema } from '@labofbabel/ither';
 //   const caps = capabilities();              // full snapshot
 //   const schema = formulaSchema();            // just the JSON Schema for the formula
 //

@@ -31,11 +31,11 @@ uses ES modules, has zero runtime dependencies, and represents coordinates with 
 ## Install
 
 ```bash
-npm install ither
+npm install @labofbabel/ither
 ```
 
 ```js
-import { Ither } from 'ither';
+import { Ither } from '@labofbabel/ither';
 ```
 
 ES modules, no runtime dependencies, no consumer build step; Node ≥ 20.10, modern browsers
@@ -49,7 +49,7 @@ the application. For runtimes without a package manager, vendor `dist/ither.min.
 A space is defined by **one object — a formula**.
 
 ```js
-import { Ither } from 'ither';
+import { Ither } from '@labofbabel/ither';
 
 const space = Ither.from({
   layers: { f: { type: 'AST', domains: { x: ['a', 'b', 'c', '0', '1'], o2: ['add', 'mul', 'sub'] } } },
@@ -212,7 +212,7 @@ A versioned set of example formulas lives in [`formulas/`](formulas/), shared by
 and client projects:
 
 ```js
-import { listFormulas, loadFormula } from 'ither/formulas/bank.mjs';
+import { listFormulas, loadFormula } from '@labofbabel/ither/formulas/bank.mjs';
 const space = Ither.from(await loadFormula('ast-shader-expression'));
 ```
 
